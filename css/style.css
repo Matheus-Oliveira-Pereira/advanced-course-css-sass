@@ -1,0 +1,211 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+*,
+*::before,
+*::after {                 /*universal selector*/
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+           
+    /*altera o modelo de caixa para que a borda e os preenchimentos não sejam mais adicionados a largura toral ou altura total especificada para uma*/
+}
+
+html{
+
+    font-size: 62.5%;
+
+
+}
+body {              /*seleciona todo o counteudo do body*/
+
+    font-family: "lato", sans-serif;
+    font-weight: 400;   /*Peso da fonte, tipo negrito*/
+    /*font-size: 16px;*/
+    line-height: 1.7;   /* basicamente o tamnho maximo que uma letra pode ocupar, mas se ela nao ocupar o espaço continua fixo*/
+    color: #777;
+    padding: 3rem;
+    font-size: 1.6rem;
+    box-sizing: border-box; 
+}
+
+.header {
+    height: 95vh;    /*basicamente dis que a box header, vai ter de comprimento 95% da janela de vizualização*/
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(126, 213, 111, 0.8),
+        rgba(40, 180, 111, 0.8)), 
+    url("../img/hero.jpg");
+    /* aqui colocamos dois backgrounds, liner gradient e uma image, o que voce quer por cima tem que vir primeiro */
+    /* para especificar  a direção do gradient adicione um to "posição"*/
+    background-size: cover;   /*cover faz com que independente do vh a imagem sempre tentara colocar a imagem dentro da caixa*/
+    background-position: top; /*garante que independente do vh o topo da imagem sempre apareça*/
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    position: relative;
+}
+
+.header__logobox {
+
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+
+}
+
+.header__logo {
+    height: 3.5rem;
+}
+
+.header__text-box {
+
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    text-align: center;
+
+}
+
+.heading-primary {
+    color: #fff;
+    text-transform: uppercase;
+    backface-visibility: hidden; /* conserta o tremor da animação*/
+    margin-bottom: 6rem;
+}
+
+.heading-primary--main {
+    display: block;         /* colocar um elemento como bloco faz com que eles ocupem toda a largura que eles tem disponil e criam quebras de linhas antes e depois deles*/
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;   /*espaçamento entre as letras*/
+    animation-name: moveInLeft;              /* para chamar a animação*/
+    animation-duration: 1s;                  /* define o tempo da animação*/
+    animation-timing-function: ease-out;
+    
+    /*animation-iteration-count: 3; - numero de vezes que a animação ira se repetir*/ 
+    /*animation-delay: 3s; - tempo para a animação iniciar*/
+} 
+
+.heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.74rem;
+    animation-name: moveInRight;              /* para chamar a animação*/
+    animation-duration: 1s;                  /* define o tempo da animação*/
+    animation-timing-function: ease-out;
+}
+
+@keyframes moveInLeft {
+    0% {    
+        opacity: 0;                          /*opacidade em 0 pra começar invisivel*/
+        transform: translateX(-10rem);       /*translatex para animar no eixo x*/
+    }   
+    80% {
+
+        transform: translateX(1rem);
+
+    }
+    100% {
+        opacity: 1;                  /*opacidade em 1 para ficar visivel*/
+        transform: translate(0);     /*tralate 0 para imagem ficar na posição normal*/
+    }
+}
+
+@keyframes moveInRight {
+    0% {    
+        opacity: 0;                          /*opacidade em 0 pra começar invisivel*/
+        transform: translateX(10rem);       /*translatex para animar no eixo x*/
+    }   
+    80% {
+
+        transform: translateX(-1rem);
+
+    }
+    100% {
+        opacity: 1;                  /*opacidade em 1 para ficar visivel*/
+        transform: translate(0);     /*tralate 0 para imagem ficar na posição normal*/
+    }
+}
+
+@keyframes moveInBotton {
+    0% {    
+        opacity: 0;                          /*opacidade em 0 pra começar invisivel*/
+        transform: translateY(3rem);       /*translatex para animar no eixo x*/
+    }   
+    
+    100% {
+        opacity: 1;                  /*opacidade em 1 para ficar visivel*/
+        transform: translate(0);     /*tralate 0 para imagem ficar na posição normal*/
+    }
+}
+
+.button:link,               /*pseudo-class são subclasses que definer a ancora, link transforma em um botão*/
+.button:visited {              /* visited - significa como o link  vai ficar visualmente após ser clicado*/
+
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative;
+   
+}
+
+.button:hover {
+    transform: translateY(-3px);            /*o eixo y se move para baixo, então para subir tem que ser numero negativo */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .2);
+
+}
+
+.button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 .5rem 1rem  rgba(0, 0, 0, .2);
+}
+
+.button--white { 
+
+    background-color: #fff;
+    color: #777;
+
+}
+
+.button::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;  /* define em qual camada vai estar, como esta negativo sera enviado para tras*/
+    transition: all .4s ;
+} 
+
+.button--white::after {
+        
+    background-color: #fff;
+
+}
+
+.button:hover::after{
+
+    transform: scaleX(1.4) scaleY(1.6);   /* aumenta no eixo x*/
+    opacity: 0;
+
+}
+
+.button--animated {
+
+    animation: moveInBotton 1s ease-out 0.75s; /* 0.75 seg é um delay*/
+    animation-fill-mode: backwards; /* isso faz com que o objeto fique atras até o o momento da animação*/
+   
+}
